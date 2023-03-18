@@ -1,5 +1,5 @@
 from bookstore_billing import settings
-from bookstore_billing.infrastructure.event_buses import EventBusConsumerFactory
+from bookstore_billing.application.event_bus import EventBusConsumerFactory
 from bookstore_billing.infrastructure.event_buses.kafka import KafkaEventBusConsumer
 
 
@@ -9,5 +9,8 @@ class KafkaEventBusConsumerFactory(EventBusConsumerFactory):
         self.__topic_name = topic_name
 
     def build(self) -> KafkaEventBusConsumer:
-        return KafkaEventBusConsumer(logger=settings.logger, consumer_group_id=self.__consumer_group_id,
-                                     topic_name=self.__topic_name)
+        return KafkaEventBusConsumer(
+            logger=settings.logger,
+            consumer_group_id=self.__consumer_group_id,
+            topic_name=self.__topic_name,
+        )

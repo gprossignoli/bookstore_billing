@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        development: "True"
+    restart: on-failure
+    ports:
+      - "${FLASK_RUN_PORT}:8001"
+    command: "pipenv run flask run --host=${FLASK_RUN_HOST} --port=8001"
+    networks:
+      - kafka
+      - bookstore_billing
+    depends_on:
+      - db
+    env_file:
+      - .env
+      - .secrets.env
+    volumes:
+      - ./src/bookstore_billing.log:/bookstore_billing.log
+      - ./src/bookstore_billing_errors.log:/bookstore_billing_errors.log
+      - ./src/consumed_data.log:/consumed_data.log
+  db:
+    image: postgres:11.8
+    container_name: "bookstore_billing_database"
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "54322:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./deploy/postgres/local_db:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
+      - .secrets.env
+    networks:
+      - bookstore_billing
+
+networks:
+  kafka:
+    external: true
+    name: kafka
+  bookstore_billing:
+    name: bookstore_billing
+
+volumes:
+  postgres_data:

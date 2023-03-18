@@ -13,8 +13,8 @@ load_dotenv(ENV_FILE)
 # LOGGING CONFIG
 
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger('bookstore_billing')
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger("bookstore_billing")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
 # to log debug messages
 debug_logger = logging.StreamHandler()
@@ -23,12 +23,16 @@ debug_logger.setFormatter(formatter)
 
 # to log general messages
 # x2 files of 2mb
-info_logger = RotatingFileHandler(filename='../bookstore_billing.log', maxBytes=2097152, backupCount=2)
+info_logger = RotatingFileHandler(
+    filename="../bookstore_billing.log", maxBytes=2097152, backupCount=2
+)
 info_logger.setLevel(logging.INFO)
 info_logger.setFormatter(formatter)
 
 # to log errors messages
-error_logger = RotatingFileHandler(filename='../bookstore_billing_errors.log', maxBytes=2097152, backupCount=2)
+error_logger = RotatingFileHandler(
+    filename="../bookstore_billing_errors.log", maxBytes=2097152, backupCount=2
+)
 error_logger.setLevel(logging.ERROR)
 error_logger.setFormatter(formatter)
 
@@ -38,7 +42,9 @@ logger.addHandler(error_logger)
 
 publication_data_logger = logging.getLogger("consumed_data")
 # x2 files of 2mb
-publication_data_handler = RotatingFileHandler(filename='../consumed_data.log', maxBytes=2097152, backupCount=2)
+publication_data_handler = RotatingFileHandler(
+    filename="../consumed_data.log", maxBytes=2097152, backupCount=2
+)
 publication_data_logger.addHandler(publication_data_handler)
 
 

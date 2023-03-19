@@ -8,7 +8,9 @@ from bookstore_billing.application.generate_simplified_bill.generate_simplified_
 from bookstore_billing.application.simplified_bill_repository import (
     SimplifiedBillRepository,
 )
-from bookstore_billing.application.user_not_exists_exception import UserNotExistsException
+from bookstore_billing.application.user_not_exists_exception import (
+    UserNotExistsException,
+)
 from bookstore_billing.application.user_repository import UserRepository
 from bookstore_billing.domain.simplified_bill.simplified_bill import SimplifiedBill
 

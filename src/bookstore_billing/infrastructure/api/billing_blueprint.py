@@ -1,10 +1,15 @@
 from flask import Blueprint
 
-from bookstore_billing.application.simplified_bill_serializer import SimplifiedBillSerializer
-from bookstore_billing.infrastructure.repositories.sqlalchemy_simplified_bill_repository import \
-    SqlAlchemySimplifiedBillRepository
+from bookstore_billing.application.simplified_bill_serializer import (
+    SimplifiedBillSerializer,
+)
+from bookstore_billing.infrastructure.repositories.sqlalchemy_simplified_bill_repository import (
+    SqlAlchemySimplifiedBillRepository,
+)
 
-billing_blueprint = Blueprint(name="billing", import_name=__name__, url_prefix="/billing")
+billing_blueprint = Blueprint(
+    name="billing", import_name=__name__, url_prefix="/billing"
+)
 
 
 @billing_blueprint.route("user/<user_id>")

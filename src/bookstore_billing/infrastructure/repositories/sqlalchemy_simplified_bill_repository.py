@@ -1,3 +1,5 @@
+from typing import List
+
 from bookstore_billing.application.simplified_bill_repository import (
     SimplifiedBillRepository,
 )
@@ -15,5 +17,6 @@ class SqlAlchemySimplifiedBillRepository(SimplifiedBillRepository):
             session.rollback()
             raise e
 
-    def find_by_user_id(self, user_id: str) -> SimplifiedBill:
-        raise NotImplementedError()
+    def find_by_user_id(self, user_id: str) -> List[SimplifiedBill]:
+        bills = SimplifiedBill.query.filter_by(user_id=user_id).all()
+        return list(bills)

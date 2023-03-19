@@ -12,4 +12,4 @@ class User(db.Model):
 	last_name = db.Column(db.String)
 	email = db.Column(db.String)
 	user_status = db.Column(db.Boolean, default=True)
-
+	bills = db.relationship('SimplifiedBill', backref='simplified_bills')

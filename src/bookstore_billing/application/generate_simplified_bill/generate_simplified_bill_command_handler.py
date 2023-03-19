@@ -38,5 +38,6 @@ class GenerateSimplifiedBillCommandHandler(CommandHandler):
                 created_at=datetime.datetime.now(),
             )
             self.__simplified_bill_repository.save(simplified_bill)
+            self.__logger.info(f"Simplified bill generated for: {command.user_id}")
         else:
             self.__logger.error(UserNotExistsException(command.user_id))

@@ -2,8 +2,9 @@ from logging import Logger
 
 from bookstore_billing.application.command_executor import CommandExecutor
 from bookstore_billing.application.event_subscriber import EventSubscriber
-from bookstore_billing.application.generate_simplified_bill.generate_simplified_bill_command import \
-    GenerateSimplifiedBillCommand
+from bookstore_billing.application.generate_simplified_bill.generate_simplified_bill_command import (
+    GenerateSimplifiedBillCommand,
+)
 from bookstore_billing.domain.purchase_book.purchase_book import PurchaseBook
 from bookstore_billing.infrastructure.event_buses.consumer_error_exception import (
     ConsumerErrorException,
@@ -33,7 +34,14 @@ class KafkaPurchaseBookCreatedSubscriber(EventSubscriber):
         while True:
             try:
                 for event in super().consume():
-                    command = GenerateSimplifiedBillCommand(user_id=event.user_id, purchase=PurchaseBook(book_id=event.book_id, quantity=event.quantity, price=event.price))
+                    command = GenerateSimplifiedBillCommand(
+                        user_id=event.user_id,
+                        purchase=PurchaseBook(
+                            book_id=event.book_id,
+                            quantity=event.quantity,
+                            price=event.price,
+                        ),
+                    )
                     CommandExecutor().execute(command)
                     # activate use case, save purchase or create billing or smth
             except ConsumerErrorException as e:

@@ -7,7 +7,7 @@ class SimplifiedBill(db.Model):
     __tablename__ = "simplified_bills"
 
     id = db.Column(db.String, primary_key=True, default=uuid.uuid4)
-    user_id = db.Column(db.String, db.ForeignKey('users.id'))
+    user_id = db.Column(db.String, db.ForeignKey("users.id"))
     user_first_name = db.Column(db.String, nullable=False)
     user_last_name = db.Column(db.String, nullable=False)
     user_email = db.Column(db.String, nullable=False)

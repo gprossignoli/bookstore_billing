@@ -4,6 +4,6 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Command(ABC):
-	@abstractmethod
-	def fqn(self) -> str:
-		return NotImplemented
+    @abstractmethod
+    def fqn(self) -> str:
+        return NotImplemented

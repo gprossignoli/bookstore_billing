@@ -1,4 +1,6 @@
-from bookstore_billing.application.simplified_bill_repository import SimplifiedBillRepository
+from bookstore_billing.application.simplified_bill_repository import (
+    SimplifiedBillRepository,
+)
 from bookstore_billing.domain.simplified_bill.simplified_bill import SimplifiedBill
 
 

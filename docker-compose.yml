@@ -19,9 +19,9 @@ services:
       - .env
       - .secrets.env
     volumes:
-      - ./src/bookstore_billing.log:bookstore_billing.log
-      - ./src/bookstore_billing_errors.log:bookstore_billing_errors.log
-      - ./src/consumed_data.log:consumed_data.log
+      - ./src/bookstore_billing.log:/app/bookstore_billing.log
+      - ./src/bookstore_billing_errors.log:/app/bookstore_billing_errors.log
+      - ./src/consumed_data.log:/app/consumed_data.log
   db:
     image: postgres:11.8
     container_name: "bookstore_billing_database"
